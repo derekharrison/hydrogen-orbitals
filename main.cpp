@@ -22,11 +22,11 @@ int main(int argc, char* argv[]) {
     int n_theta = 40;   //Number of nodes in theta direction
     int n_r = 200;      //Number of nodes in r direction
 
-    double R = 10.0;    //Length of domain
+    double R = 40.0;    //Length of domain
 
-    int n = 2;          //Principal quantum number
-    int l = 1;          //Azimuthal number
-    int m = 0;          //Magnetic quantum number
+    int n = 4;          //Principal quantum number
+    int l = 2;          //Azimuthal number
+    int m = 1;          //Magnetic quantum number
 
     double a0 = 1.0;    //Bohr radius
 
