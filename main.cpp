@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     int l = 1;          //Azimuthal number
     int m = 0;          //Magnetic quantum number
 
-    /* Allocate memory for grid data */
+    /* Allocate memory */
     Complex*** psi = mat3D(n_r, n_theta, n_phi);
     Complex*** psi_square = mat3D(n_r, n_theta, n_phi);
     double *r = new double[n_r];
@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     double dtheta = 2*M_PI/n_theta;
     double dphi = M_PI/(n_phi-1);
 
-    /* Initialize grid data */
+    /* Initialize r vector */
     for(int i = 0; i < n_r; ++i) {
         r[i] = i*dr + 0.5*dr;
     }
@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) {
     }
 
     /* Normalize psi */
-    Complex Integral(0, 0);
+    Complex integral(0, 0);
 
     /* Top pole */
     for(int i = 1; i < n_r; ++i) {
@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
         Complex psi_sq = psi[i][0][0] * psi_conj;
         psi_sq.a = psi_sq.a*dV;
         psi_sq.b = psi_sq.b*dV;
-        Integral = Integral + psi_sq;
+        integral = integral + psi_sq;
     }
 
     /* Central nodes */
@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
                 Complex psi_sq = psi[i][j][k] * psi_conj;
                 psi_sq.a = psi_sq.a*dV;
                 psi_sq.b = psi_sq.b*dV;
-                Integral = Integral + psi_sq;
+                integral = integral + psi_sq;
             }
         }
     }
@@ -117,15 +117,15 @@ int main(int argc, char* argv[]) {
         Complex psi_sq = psi[i][0][n_phi-1] * psi_conj;
         psi_sq.a = psi_sq.a*dV;
         psi_sq.b = psi_sq.b*dV;
-        Integral = Integral + psi_sq;
+        integral = integral + psi_sq;
     }
 
     /* Normalize */
     for(int i = 1; i < n_r; ++i) {
         for(int j = 0; j < n_theta; ++j) {
             for(int k = 0; k < n_phi; ++k) {
-                psi[i][j][k].a = psi[i][j][k].a/sqrt(Integral.a);
-                psi[i][j][k].b = psi[i][j][k].b/sqrt(Integral.a);
+                psi[i][j][k].a = psi[i][j][k].a/sqrt(integral.a);
+                psi[i][j][k].b = psi[i][j][k].b/sqrt(integral.a);
             }
         }
     }
@@ -152,7 +152,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    /* Export grid data */
+    /* Export some data */
     std::ofstream myfile;
     std::string file_name = "grid_data.txt";
     myfile.open(file_name);
