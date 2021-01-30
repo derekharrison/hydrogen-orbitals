@@ -52,7 +52,7 @@ for i in range(0, nr):
         Z_t[i+nr][j] = Z_2d_m[i][j]
         Psi_p[i+nr][j] = Psi_sq_2d_m[i][j]
         
-cont = plt.contourf(X_t, Z_t, Psi_p, linspace(0, max_pd, 300))
+cont = plt.contourf(X_t, Z_t, Psi_p, linspace(0, max_pd, 300), cmap = 'RdBu')
 plt.colorbar()
 plt.xlabel("X")
 plt.ylabel("Z")
