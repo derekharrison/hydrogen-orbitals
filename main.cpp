@@ -28,6 +28,8 @@ int main(int argc, char* argv[]) {
     int l = 1;          //Azimuthal number
     int m = 0;          //Magnetic quantum number
 
+    double a0 = 1.0;    //Bohr radius
+
     /* Allocate memory */
     Complex*** psi = mat3D(n_r, n_theta, n_phi);
     Complex*** psi_square = mat3D(n_r, n_theta, n_phi);
@@ -74,7 +76,7 @@ int main(int argc, char* argv[]) {
     for(int i = 1; i < n_r; ++i) {
         for(int j = 0; j < n_theta; ++j) {
             for(int k = 0; k < n_phi; ++k) {
-                double rho = 2*r_p[i]/n;
+                double rho = 2*r_p[i]/(n*a0);
                 double beta = exp(-rho/2) * pow(rho, l) * laguerre_polynomial(rho, 2*l+1, n-l-1) * legendre_polynomial(m, l, cos(phi_p[k]));
                 Complex e_im_theta(cos(m*theta_p[j]), sin(m*theta_p[j]));
                 psi[i][j][k].a = e_im_theta.a * beta;
