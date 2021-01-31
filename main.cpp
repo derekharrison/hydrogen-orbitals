@@ -206,7 +206,7 @@ int main(int argc, char* argv[]) {
     file_name = "data_real.txt";
     myfile_real.open(file_name);
 
-    int theta_slice = 0;//n_theta/4; // Should be a value between 0 and n_theta/2 - 2
+    int theta_slice = 0; // Should be a value between 0 and n_theta/2 - 2
     /* Export psi central nodes */
     for(int i = 0; i < n_r; ++i) {
         for(int j = theta_slice; j < theta_slice + 1; ++j) {
@@ -235,7 +235,7 @@ int main(int argc, char* argv[]) {
     file_name = "data_im.txt";
     myfile_im.open(file_name);
 
-    theta_slice = n_theta/8; // Should be a value between 0 and n_theta/2 - 2
+    theta_slice = 0; // Should be a value between 0 and n_theta/2 - 2
     /* Export psi central nodes */
     for(int i = 0; i < n_r; ++i) {
         for(int j = theta_slice; j < theta_slice + 1; ++j) {
