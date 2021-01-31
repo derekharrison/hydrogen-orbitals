@@ -154,11 +154,23 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    /* Compute max psi_real */
+    double max_real = -1e+8;
+    for(int i = 0; i < n_r; ++i) {
+        for(int j = 0; j < n_theta; ++j) {
+            for(int k = 0; k < n_phi; ++k) {
+                if(psi[i][j][k].a > max_real) {
+                    max_real = psi[i][j][k].a;
+                }
+            }
+        }
+    }
+
     /* Export some data */
     std::ofstream myfile;
     std::string file_name = "grid_data.txt";
     myfile.open(file_name);
-    myfile << n_r << " " << n_theta << " " <<  n_phi << " " << max_pd << "\n";
+    myfile << n_r << " " << n_theta << " " <<  n_phi << " " << max_pd << " " << max_real << "\n";
     myfile.close();
 
     /* Export probability density data */
@@ -166,7 +178,7 @@ int main(int argc, char* argv[]) {
     file_name = "data.txt";
     myfile_pd.open(file_name);
 
-    /* Export central nodes */
+    /* Export psi central nodes */
     for(int i = 0; i < n_r; ++i) {
         for(int j = 0; j < 1; ++j) {
             for(int k = 0; k < n_phi; ++k) {
@@ -189,10 +201,104 @@ int main(int argc, char* argv[]) {
 
     myfile_pd.close();
 
+    /* Export psi real data */
+    std::ofstream myfile_real;
+    file_name = "data_real.txt";
+    myfile_real.open(file_name);
+
+    int theta_slice = 0;//n_theta/4; // Should be a value between 0 and n_theta/2 - 2
+    /* Export psi central nodes */
+    for(int i = 0; i < n_r; ++i) {
+        for(int j = theta_slice; j < theta_slice + 1; ++j) {
+            for(int k = 0; k < n_phi; ++k) {
+                double x = r_p[i]*sin(phi_p[k])*cos(theta_p[j]);
+                double z = r_p[i]*cos(phi_p[k]);
+                myfile_real << x << " " << z << " " << psi[i][j][k].a << "\n";
+            }
+        }
+    }
+
+    for(int i = 0; i < n_r; ++i) {
+        for(int j = n_theta/2 + theta_slice; j < n_theta/2 + theta_slice + 1; ++j) {
+            for(int k = 0; k < n_phi; ++k) {
+                double x = r_p[i]*sin(phi_p[k])*cos(theta_p[j]);
+                double z = r_p[i]*cos(phi_p[k]);
+                myfile_real << x << " " << z << " " << psi[i][j][k].a << "\n";
+            }
+        }
+    }
+
+    myfile_real.close();
+
+    /* Export psi im data */
+    std::ofstream myfile_im;
+    file_name = "data_im.txt";
+    myfile_im.open(file_name);
+
+    theta_slice = n_theta/8; // Should be a value between 0 and n_theta/2 - 2
+    /* Export psi central nodes */
+    for(int i = 0; i < n_r; ++i) {
+        for(int j = theta_slice; j < theta_slice + 1; ++j) {
+            for(int k = 0; k < n_phi; ++k) {
+                double x = r_p[i]*sin(phi_p[k])*cos(theta_p[j]);
+                double z = r_p[i]*cos(phi_p[k]);
+                myfile_im << x << " " << z << " " << psi[i][j][k].b << "\n";
+            }
+        }
+    }
+
+    for(int i = 0; i < n_r; ++i) {
+        for(int j = n_theta/2 + theta_slice; j < n_theta/2 + theta_slice + 1; ++j) {
+            for(int k = 0; k < n_phi; ++k) {
+                double x = r_p[i]*sin(phi_p[k])*cos(theta_p[j]);
+                double z = r_p[i]*cos(phi_p[k]);
+                myfile_im << x << " " << z << " " << psi[i][j][k].b << "\n";
+            }
+        }
+    }
+
+    myfile_im.close();
+
+    /* Export psi real data at n_phi/2 */
+    std::ofstream myfile_phi_2;
+    file_name = "data_real_phi_2.txt";
+    myfile_phi_2.open(file_name);
+
+    /* Export psi central nodes */
+    for(int i = 0; i < n_r; ++i) {
+        for(int j = 0; j < n_theta; ++j) {
+            for(int k = n_phi/2; k < n_phi/2 + 1; ++k) {
+                double x = r_p[i]*sin(phi_p[k])*cos(theta_p[j]);
+                double y = r_p[i]*sin(phi_p[k])*sin(theta_p[j]);
+                myfile_phi_2 << x << " " << y << " " << psi[i][j][k].a << "\n";
+            }
+        }
+    }
+
+    myfile_phi_2.close();
+
+    /* Export psi real data at n_phi/2 */
+    std::ofstream myfile_phi_2_im;
+    file_name = "data_real_phi_2_im.txt";
+    myfile_phi_2_im.open(file_name);
+
+    /* Export psi central nodes */
+    for(int i = 0; i < n_r; ++i) {
+        for(int j = 0; j < n_theta; ++j) {
+            for(int k = n_phi/2; k < n_phi/2 + 1; ++k) {
+                double x = r_p[i]*sin(phi_p[k])*cos(theta_p[j]);
+                double y = r_p[i]*sin(phi_p[k])*sin(theta_p[j]);
+                myfile_phi_2_im << x << " " << y << " " << psi[i][j][k].b << "\n";
+            }
+        }
+    }
+
+    myfile_phi_2_im.close();
+
     /* Print results */
     for(int i = 0; i < n_r; ++i) {
         printf("psi_top_real[%i]: %f, psi_top_im[%i]: %f, psi_bottom_real[%i]: %f, psi_bottom_im[%i]: %f, real: %f, im: %f\n",
-                i, psi[i][0][0].a, i, psi[i][0][0].b, i, psi[i][0][n_phi-1].a, i, psi[i][0][n_phi-1].b, psi[i][n_theta/2][n_phi/2].a, psi[i][n_theta/2][n_phi/2].b);
+                i, psi[i][0][0].a, i, psi[i][0][0].b, i, psi[i][0][n_phi-1].a, i, psi[i][0][n_phi-1].b, psi[i][n_theta/2][n_phi/2].a, psi[i][n_theta/4][n_phi/4].b);
     }
 
     return 0;
