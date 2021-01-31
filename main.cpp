@@ -277,7 +277,7 @@ int main(int argc, char* argv[]) {
 
     myfile_phi_2.close();
 
-    /* Export psi real data at n_phi/2 */
+    /* Export psi im data at n_phi/2 */
     std::ofstream myfile_phi_2_im;
     file_name = "data_real_phi_2_im.txt";
     myfile_phi_2_im.open(file_name);
