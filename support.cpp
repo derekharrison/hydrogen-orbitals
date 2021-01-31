@@ -45,7 +45,14 @@ long double dm_Pl_dxm(long double x, int m, int l) {
 }
 
 double legendre_polynomial(int m, int l, double x) {
-    double P_l_m_x = pow(-1.0, m) * pow(1.0 - x*x, 0.5*m) * dm_Pl_dxm(x, m, l);
+	double P_l_m_x = 0.0;
+	if(m > -1) {
+        return P_l_m_x = pow(-1.0, m) * pow(1.0 - x*x, 0.5*m) * dm_Pl_dxm(x, m, l);
+	}
+	else {
+		m = -m;
+		P_l_m_x = pow(-1.0, m) * factorial(l-m) / factorial(l+m) * legendre_polynomial(m, l, x);
+	}
 
     return P_l_m_x;
 }
