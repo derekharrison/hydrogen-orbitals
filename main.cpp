@@ -57,6 +57,13 @@ int main(int argc, char* argv[]) {
 
     printf("error in percentage : %f\n", solution_data.error);
 
+    /* Deallocate memory */
+    free_mat3D(solution_data.psi, domain_data.n_r, domain_data.n_theta);
+    free_mat3D(solution_data.psi_square, domain_data.n_r, domain_data.n_theta);
+    delete [] solution_data.r_p;
+    delete [] solution_data.theta_p;
+    delete [] solution_data.phi_p;
+
     return 0;
 }
 
