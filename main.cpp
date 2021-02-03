@@ -51,9 +51,11 @@ int main(int argc, char* argv[]) {
 
     /* Print some results */
     for(int i = 0; i < domain_data.n_r; ++i) {
-        printf("psi_top_real[%i]: %f, psi_top_im[%i]: %f, psi_bottom_real[%i]: %f, psi_bottom_im[%i]: %f, real: %f, im: %f\n",
-                i, solution_data.psi[i][0][0].a, i, solution_data.psi[i][0][0].b, i, solution_data.psi[i][0][domain_data.n_phi-1].a,
-                i, solution_data.psi[i][0][domain_data.n_phi-1].b, solution_data.psi[i][domain_data.n_theta/2][domain_data.n_phi/2].a, solution_data.psi[i][domain_data.n_theta/4][domain_data.n_phi/4].b);
+    	int theta = domain_data.n_theta/4;
+    	int phi = domain_data.n_phi/2;
+        printf("real psi[%i][%i][%i]: %f, im psi[%i][%i][%i]: %f\n",
+        		i, theta, phi, solution_data.psi[i][theta][phi].a,
+        		i, theta, phi, solution_data.psi[i][theta][phi].b);
     }
 
     printf("error in percentage : %f\n", solution_data.error);
