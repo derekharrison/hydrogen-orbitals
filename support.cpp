@@ -199,7 +199,6 @@ void normalize_psi(double* r, d_data domain_data, s_data* solution_data) {
             }
         }
     }
-
 }
 
 void compute_probability_density(d_data domain_data, s_data *solution_data) {
@@ -254,7 +253,7 @@ void export_grid_data(std::string file_name, d_data domain_data, double max_pd, 
     myfile.open(file_name);
     myfile << domain_data.n_r << " "
            << domain_data.n_theta << " "
-           <<  domain_data.n_phi << " "
+           << domain_data.n_phi << " "
            << max_pd << " "
            << max_real << "\n";
     myfile.close();
