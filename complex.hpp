@@ -16,6 +16,7 @@ public:
     Complex(double a, double b);
     Complex operator+(const Complex& m);
     Complex operator*(const Complex& m);
+    Complex operator/(const Complex& m);
 };
 
 #endif /* COMPLEX_HPP_ */

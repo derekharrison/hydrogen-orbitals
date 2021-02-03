@@ -22,7 +22,7 @@ X_im, Z_im, Psi_im = np.genfromtxt(num_data_file, unpack=True)
 num_data_file = 'data_real_phi_2.txt'
 X_r_phi_2, Y_r_phi_2, Psi_r_phi_2 = np.genfromtxt(num_data_file, unpack=True)
 
-num_data_file = 'data_real_phi_2_im.txt'
+num_data_file = 'data_im_phi_2.txt'
 X_r_phi_2_im, Y_r_phi_2_im, Psi_r_phi_2_im = np.genfromtxt(num_data_file, unpack=True)
 
 X_2d = np.zeros((nr, nphi))
