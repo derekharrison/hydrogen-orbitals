@@ -30,10 +30,11 @@ int main(int argc, char* argv[]) {
     quantum_numbers.l = 2;      //Azimuthal number
     quantum_numbers.m = 1;      //Magnetic quantum number
 
-    physical_params.a0 = 1.0;    //Bohr radius
-    physical_params.h = 1.0;     //Constant
-    physical_params.mp = 1.0;    //Mass of particle
-    physical_params.kp = 1.0;    //Potential constant
+    physical_params.a0 = 1.0;   //Bohr radius
+    physical_params.h = 1.0;    //Constant
+    physical_params.mp = 1.0;   //Mass of particle
+    physical_params.kp = 1.0;   //Potential constant
+    physical_params.ke = 1.0;   //Constant in energy level equation
 
     /* Allocate memory for solution data */
     solution_data.psi = mat3D(domain_data.n_r, domain_data.n_theta, domain_data.n_phi);

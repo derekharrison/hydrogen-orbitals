@@ -395,7 +395,7 @@ void verify_solution(d_data domain_data, p_params physical_params, q_nums quantu
     double dtheta = 2*M_PI/domain_data.n_theta;
     double dphi = M_PI/(domain_data.n_phi-1);
     double alpha = physical_params.h/(2*physical_params.mp);
-    double E = 1.0/(quantum_numbers.n*quantum_numbers.n);
+    double E = physical_params.ke/(quantum_numbers.n*quantum_numbers.n);
 
     for(int i = 1; i < domain_data.n_r - 1; ++i) {
         for(int j = 1; j < domain_data.n_theta - 1; ++j) {

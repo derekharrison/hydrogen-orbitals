@@ -28,6 +28,7 @@ typedef struct physical_parameters {
     double h;
     double mp;
     double kp;
+    double ke;
 } p_params;
 
 typedef struct solution_data {
