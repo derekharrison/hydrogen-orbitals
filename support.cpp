@@ -15,7 +15,7 @@
 
 int factorial(int n) {
 
-	int p = 1;
+    int p = 1;
 
     for(int i = 1; i < n + 1; ++i) {
         p = p * i;
@@ -26,9 +26,9 @@ int factorial(int n) {
 
 long double P_l(long double x, int l) {
 
-	long double P_l_x = 0.0;
+    long double P_l_x = 0.0;
 
-	for(int k = 0; k < l/2 + 1; ++k) {
+    for(int k = 0; k < l/2 + 1; ++k) {
         P_l_x += 1.0/pow(2.0, l) * pow(-1.0, k) * factorial(2*l - 2*k) * pow(x, l - 2*k) /
                 (factorial(k) * factorial(l-k) * factorial(l-2*k));
     }
@@ -38,7 +38,7 @@ long double P_l(long double x, int l) {
 
 long double dm_Pl_dxm(long double x, int m, int l) {
 
-	long double f = 0.0;
+    long double f = 0.0;
     long double dx = 0.0001;
 
     if(m == 0) {
@@ -56,7 +56,7 @@ long double dm_Pl_dxm(long double x, int m, int l) {
 
 double legendre_polynomial(int m, int l, double x) {
 
-	double P_l_m_x = 0.0;
+    double P_l_m_x = 0.0;
 
     if(m > -1) {
         return P_l_m_x = pow(-1.0, m) * pow(1.0 - x*x, 0.5*m) * dm_Pl_dxm(x, m, l);
@@ -71,7 +71,7 @@ double legendre_polynomial(int m, int l, double x) {
 
 long double laguerre_polynomial(long double x, int a, int k) {
 
-	long double f = 0.0;
+    long double f = 0.0;
 
     if(k == 0) {
         return f = 1.0;
@@ -103,7 +103,7 @@ void init_r_and_phi(double* r, double* phi, d_data domain_data) {
 
 void init_domain_coordinates(d_data domain_data, s_data* solution_data) {
 
-	double dr = domain_data.R/domain_data.n_r;
+    double dr = domain_data.R/domain_data.n_r;
     double dtheta = 2*M_PI/domain_data.n_theta;
     double dphi = M_PI/(domain_data.n_phi-1);
 
@@ -125,7 +125,7 @@ void init_domain_coordinates(d_data domain_data, s_data* solution_data) {
 
 void compute_wave_function(d_data domain_data, p_params physical_params, q_nums quantum_numbers, s_data* solution_data) {
 
-	for(int i = 0; i < 1; ++i) {
+    for(int i = 0; i < 1; ++i) {
         for(int j = 0; j < domain_data.n_theta; ++j) {
             for(int k = 0; k < domain_data.n_phi; ++k) {
                 solution_data->psi[i][j][k].a = 0.0;
@@ -250,13 +250,13 @@ double compute_max_psi_real(d_data domain_data, s_data* solution_data) {
 
 void export_grid_data(std::string file_name, d_data domain_data, double max_pd, double max_real) {
 
-	std::ofstream myfile;
+    std::ofstream myfile;
     myfile.open(file_name);
     myfile << domain_data.n_r << " "
-    	   << domain_data.n_theta << " "
-    	   <<  domain_data.n_phi << " "
-    	   << max_pd << " "
-    	   << max_real << "\n";
+           << domain_data.n_theta << " "
+           <<  domain_data.n_phi << " "
+           << max_pd << " "
+           << max_real << "\n";
     myfile.close();
 }
 
@@ -291,7 +291,7 @@ void export_probability_density(std::string file_name, d_data domain_data, s_dat
 
 void export_psi_real(std::string file_name, d_data domain_data, s_data* solution_data) {
 
-	std::ofstream myfile_real;
+    std::ofstream myfile_real;
     myfile_real.open(file_name);
 
     int theta_slice = 0; // Should be a value between 0 and n_theta/2 - 2
@@ -321,7 +321,7 @@ void export_psi_real(std::string file_name, d_data domain_data, s_data* solution
 
 void export_psi_im(std::string file_name, d_data domain_data, s_data* solution_data) {
 
-	std::ofstream myfile_im;
+    std::ofstream myfile_im;
     myfile_im.open(file_name);
 
     int theta_slice = 0; // Should be a value between 0 and n_theta/2 - 2
@@ -370,7 +370,7 @@ void export_data_phi_2(std::string file_name, d_data domain_data, s_data* soluti
 
 void export_data_phi_2_im(std::string file_name, d_data domain_data, s_data* solution_data) {
 
-	std::ofstream myfile_phi_2_im;
+    std::ofstream myfile_phi_2_im;
     myfile_phi_2_im.open(file_name);
 
     /* Export psi central nodes */
